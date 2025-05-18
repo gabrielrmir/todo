@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>TODO</title>
+    <style>
+
+    :root {
+      --bg0: #282828;
+      --bg4: #7c6f64;
+      --fg1: #ebdbb2;
+      --green: #b8bb26;
+      font-family: Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: var(--green);
+    }
+
+    body {
+      background-color: var(--bg0);
+      color: var(--fg1);
+    }
+
+    form {
+      display: flex;
+      width: 400px;
+    }
+
+    input {
+      border: 2px solid var(--bg4);
+      background-color: var(--bg0);
+      color: var(--fg1);
+      padding: 8px;
+      font-size: 1rem;
+      height: 48px;
+      outline: none;
+      flex-grow: 1;
+    }
+
+    button {
+      border: 2px solid var(--bg4);
+      margin-left: 8px;
+      background-color: var(--bg0);
+      color: var(--fg1);
+      width: 48px;
+      font-size: 2rem;
+      line-height:0;
+      height: 48px;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    #tasks {
+      margin-top: 16px;
+      width: 400px;
+      max-width: 400px;
+    }
+
+    #tasks > div {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items:center;
+      margin-top: 8px;
+    }
+
+    #tasks span {
+      flex-grow: 1;
+      display: inline-block;
+      font-size: 2rem;
+    }
+
+    main {
+      border: 2px solid var(--bg4);
+      width: 500px;
+      margin: 64px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none;
+      text-align: center;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <a href="https://github.com/gabrielrmir/todo">view-source</a>
+    </header>
+    <main>
+    <h1>TODO</h1>
+    <form id="taskForm">
+      <input id="title" type="text" autocomplete="off" placeholder="Add task...">
+      <button id="create">+</button>
+    </form>
+    <div id="tasks"></div>
+    </main>
+    <script>
+      taskForm.onsubmit = onFormSubmit;
+
+      function onFormSubmit(e) {
+        e.preventDefault();
+        createTask();
+      }
+
+      function createTask() {
+        if (title.value.length === 0) {
+          return;
+        }
+
+        let task = document.createElement("div");
+        let taskTitle = document.createElement("span");
+        let deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "x";
+
+        taskTitle.innerHTML = title.value;
+        deleteButton.onclick = deleteTask;
+        title.value = "";
+
+        task.append(taskTitle);
+        task.append(deleteButton);
+        tasks.append(task);
+      }
+
+      function deleteTask(e) {
+        e.target.parentElement.remove();
+      }
+    </script>
+  </body>
+
+</html>
