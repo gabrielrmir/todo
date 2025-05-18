@@ -3,6 +3,8 @@
 
   <head>
     <title>TODO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <style>
 
     :root {
@@ -15,6 +17,7 @@
 
     * {
       box-sizing: border-box;
+      min-width: 0;
     }
 
     h1 {
@@ -24,19 +27,21 @@
     body {
       background-color: var(--bg0);
       color: var(--fg1);
+      margin: 0;
     }
 
     form {
       display: flex;
-      width: 400px;
+      width: 100%;
     }
 
     input {
-      border: 2px solid var(--bg4);
+      border: none;
+      border-bottom: 2px solid var(--bg4);
+      font-size: 2rem;
       background-color: var(--bg0);
       color: var(--fg1);
       padding: 8px;
-      font-size: 1rem;
       height: 48px;
       outline: none;
       flex-grow: 1;
@@ -47,6 +52,7 @@
       margin-left: 8px;
       background-color: var(--bg0);
       color: var(--fg1);
+      min-width: 48px;
       width: 48px;
       font-size: 2rem;
       line-height:0;
@@ -57,19 +63,17 @@
 
     #tasks {
       margin-top: 16px;
-      width: 400px;
-      max-width: 400px;
+      width: 100%;
     }
 
     #tasks > div {
-      width: 100%;
-      max-width: 100%;
       display: flex;
       align-items:center;
       margin-top: 8px;
     }
 
     #tasks span {
+      word-wrap: break-word;
       flex-grow: 1;
       display: inline-block;
       font-size: 2rem;
@@ -77,8 +81,8 @@
 
     main {
       border: 2px solid var(--bg4);
-      width: 500px;
       margin: 64px auto;
+      max-width: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -93,6 +97,13 @@
 
     a:hover {
       text-decoration: underline;
+    }
+
+    @media screen and (max-width: 600px) {
+      main {
+        border: none;
+        margin: 0;
+      }
     }
 
     </style>
