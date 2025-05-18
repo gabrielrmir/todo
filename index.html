@@ -123,33 +123,48 @@
     </main>
     <script>
       taskForm.onsubmit = onFormSubmit;
+      let list = [];
+      (() => {
+        let data = localStorage.getItem("data");
+        if (data == null) return;
+        list = JSON.parse(data);
+        refreshTasks();
+      })();
 
       function onFormSubmit(e) {
         e.preventDefault();
-        createTask();
-      }
-
-      function createTask() {
-        if (title.value.length === 0) {
-          return;
-        }
-
-        let task = document.createElement("div");
-        let taskTitle = document.createElement("span");
-        let deleteButton = document.createElement("button");
-        deleteButton.innerHTML = "x";
-
-        taskTitle.innerHTML = title.value;
-        deleteButton.onclick = deleteTask;
+        list.push(title.value);
+        saveTasks();
+        refreshTasks();
         title.value = "";
-
-        task.append(taskTitle);
-        task.append(deleteButton);
-        tasks.append(task);
       }
 
-      function deleteTask(e) {
-        e.target.parentElement.remove();
+      function saveTasks() {
+        const data = JSON.stringify(list);
+        localStorage.setItem("data", data);
+      }
+
+      function refreshTasks() {
+        tasks.innerHTML = ""
+        for (let i in list) {
+          let t = list[i];
+          let task = document.createElement("div");
+          let taskTitle = document.createElement("span");
+          let deleteButton = document.createElement("button");
+          deleteButton.innerHTML = "x";
+          taskTitle.innerHTML = t;
+          deleteButton.onclick = () => {deleteTask(i)};
+
+          task.append(taskTitle);
+          task.append(deleteButton);
+          tasks.append(task);
+        }
+      }
+
+      function deleteTask(i) {
+        list.splice(i, 1);
+        saveTasks();
+        refreshTasks();
       }
     </script>
   </body>
